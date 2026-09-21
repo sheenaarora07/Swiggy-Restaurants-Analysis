@@ -1,161 +1,80 @@
-# 🍽️ Swiggy Restaurant Analytics --- Power BI Dashboard
+# 🍽️ Swiggy Restaurant Analytics — Power BI Dashboard
 
-An interactive **Power BI dashboard for analysing Swiggy restaurant
-listings**, with a focus on restaurant presence, location coverage,
-cuisine mix, ratings, pricing, vegetarian availability, and promotional
-offers.
+An interactive **Power BI restaurant analytics project** built from a Swiggy restaurant dataset containing **140,657 records across 581 locations**.
 
-The project combines a raw restaurant dataset with Power Query
-transformations, DAX calculations, and business-focused visual
-storytelling to turn 140K+ records into an executive-friendly dashboard.
+The dashboard is designed as a two-page analytical story: the first page provides an overall restaurant-market view, while the second page drills into **cuisine, ratings, pricing, offers, and top-rated restaurants**.
 
-------------------------------------------------------------------------
+---
 
-## 📌 What This Project Answers
+## 📌 Project Overview
 
-The dashboard is designed to answer practical business questions such
-as:
+This project demonstrates an end-to-end data analytics workflow:
 
--   Where is restaurant supply most concentrated?
--   Which cuisine combinations appear most frequently?
--   How are restaurant ratings distributed?
--   How does pricing vary across locations?
--   Is there a visible relationship between restaurant price and rating?
--   What share of restaurants are Pure Veg?
--   How widespread are promotional offers?
--   Which locations show unusually high average pricing?
+```text
+Raw Swiggy Dataset
+        ↓
+Data Understanding
+        ↓
+Data Cleaning & Transformation
+        ↓
+Power Query
+        ↓
+Data Modelling
+        ↓
+DAX Measures
+        ↓
+KPI Development
+        ↓
+Interactive Visualizations
+        ↓
+Business Insights
+```
 
-------------------------------------------------------------------------
+The analysis focuses on:
 
-## 📊 Dataset at a Glance
+- Restaurant distribution by location
+- Cuisine availability and concentration
+- Rating distribution
+- Average pricing
+- Price vs. rating patterns
+- Pure Veg restaurant share
+- Promotional offer availability
+- Cuisine-level pricing and ratings
+- Top-rated restaurant listings
 
-The source file is `Swiggy_Dataset.csv`.
+---
 
-  Attribute                       Details
-  ------------------------- -------------
-  Restaurant records          **140,657**
-  Columns                          **10**
-  Locations                       **581**
-  Unique restaurant names       **100K+**
-  Pure Veg share                **\~42%**
-  Records with offers         **\~98.7%**
+# 🖼️ Dashboard Preview
 
-### Source Columns
+## 🏠 Page 1 — Restaurant Overview
 
-  Column                Business Meaning
-  --------------------- --------------------------------
-  `Restaurant Name`     Restaurant listing name
-  `Cuisine`             Cuisine or cuisine combination
-  `Rating`              Customer rating
-  `Number of Ratings`   Rating/review-count bucket
-  `Average Price`       Approximate price for two
-  `Number of Offers`    Number of offers available
-  `Offer Name`          Promotional offer details
-  `Area`                Restaurant operating area
-  `Pure Veg`            Vegetarian classification
-  `Location`            City/location
+![Restaurant Overview](Screenshots/Restaurant_Overview.png)
 
-------------------------------------------------------------------------
+The first page provides a high-level view of the restaurant landscape using KPI cards, location analysis, cuisine mix, rating buckets, pricing by location, price-vs-rating analysis, Pure Veg distribution, key insights, and recommendations.
 
-## 🧹 Data Preparation
+### KPI Cards
 
-The raw dataset contains fields that are not immediately analysis-ready.
-The data was prepared in **Power Query** before building the dashboard.
+| KPI | Dashboard Value |
+|---|---:|
+| 🍴 Total Restaurants | **139K** |
+| 📍 Total Locations | **581** |
+| ⭐ Average Rating | **4.04** |
+| ₹ Average Price | **₹272.94** |
+| 🌿 Pure Veg % | **41.99%** |
+| 🏷️ Restaurants with Offers | **99K** |
 
-### Key transformations
+### Main Visuals
 
--   Converted `Rating` into a numeric field.
--   Treated non-numeric rating values such as `NEW` and `--`
-    appropriately for numerical analysis.
--   Removed the currency symbol and text such as `for two` from
-    `Average Price`.
--   Converted average price into a numeric measure.
--   Prepared `Number of Ratings` for quantitative analysis using
-    rating-count buckets/lower-bound values.
--   Standardised categorical fields such as `Pure Veg` and `Location`.
--   Reviewed missing values in cuisine, area, offer-name and
-    rating-count fields.
--   Created rating buckets for distribution analysis.
--   Prepared fields required for location, cuisine, offer and vegetarian
-    analysis.
+**Restaurants by Location**  
+Shows the distribution of restaurant listings across locations such as Kanpur, Central-Goa, Indore, Nagpur, Vadodara, Lucknow, Hyderabad and Jaipur.
 
-The raw file contains **14,542 missing values in `Number of Ratings`**,
-**1,808 missing `Offer Name` values**, **27 missing cuisine values**,
-and **2 missing area values**. These were considered during the
-preparation stage rather than treating the raw file as analysis-ready.
+**Restaurants by Cuisine**  
+A treemap highlights frequently occurring cuisine groups, including North Indian, Indian, Chinese, Bakery, South Indian and Biryani.
 
-------------------------------------------------------------------------
+**Restaurants by Rating Bucket**  
+Ratings are grouped into:
 
-# 📈 Dashboard Overview
-
-The dashboard is structured as a **restaurant performance overview** so
-that a user can move from high-level KPIs into location, cuisine,
-rating, pricing and Pure Veg patterns.
-
-## 🔢 KPI Summary
-
-The dashboard currently highlights:
-
-  KPI                            Dashboard Value
-  ---------------------------- -----------------
-  🍴 Total Restaurants                  **139K**
-  📍 Total Locations                     **581**
-  ⭐ Average Rating                     **4.04**
-  ₹ Average Price                    **₹272.94**
-  🌿 Pure Veg %                       **41.99%**
-  🏷️ Restaurants with Offers             **99K**
-
-These cards provide an immediate snapshot before the user starts
-exploring individual dimensions.
-
-------------------------------------------------------------------------
-
-## 📍 Restaurant Distribution by Location
-
-A horizontal bar chart compares restaurant listings across locations.
-
-The dashboard highlights locations such as:
-
--   Kanpur
--   Central-Goa
--   Indore
--   Nagpur
--   Vadodara
--   Lucknow
--   Hyderabad
--   Jaipur
-
-This view helps identify areas with a high concentration of restaurant
-listings and provides a starting point for geographical comparison.
-
-------------------------------------------------------------------------
-
-## 🍜 Cuisine Mix
-
-The treemap shows the relative presence of cuisine
-categories/combinations.
-
-Examples visible in the dashboard include:
-
--   North Indian, Chinese
--   Indian
--   Chinese
--   Indian, Chinese
--   North Indian
--   Bakery
--   South Indian
--   Biryani
-
-The visualization is useful for understanding which cuisine groups
-occupy a larger share of the restaurant landscape.
-
-------------------------------------------------------------------------
-
-## ⭐ Rating Distribution
-
-Restaurant ratings are grouped into buckets:
-
-``` text
+```text
 < 2.5
 2.5 – 3.0
 3.0 – 3.5
@@ -164,206 +83,308 @@ Restaurant ratings are grouped into buckets:
 4.5 – 5.0
 ```
 
-The **4.0--4.5** bucket is the largest category in the dashboard, with
-approximately **54K restaurant records**.
+The dashboard shows the **4.0–4.5 bucket as the largest**, at approximately **54K records**.
 
-This provides a quick view of the overall rating profile rather than
-focusing only on the average rating.
+**Average Price by Location**  
+Compares average restaurant pricing across locations. Lalitpur is visibly higher than the other locations shown in the dashboard and is therefore a useful point for further investigation.
 
-------------------------------------------------------------------------
+**Average Price vs Rating**  
+Uses a scatter/bubble chart to explore the relationship between average price and restaurant rating, while incorporating rating-count information.
 
-## ₹ Pricing by Location
+**Pure Veg Distribution**  
+Shows approximately:
 
-The average-price chart compares restaurant pricing across locations.
+- 🌿 Pure Veg — **41.99%**
+- 🍽️ Non-Pure Veg — **58.01%**
 
-One notable observation in the dashboard is **Lalitpur**, which has a
-substantially higher average price than the other locations displayed.
+### Key Insights Shown on the Dashboard
 
-This type of comparison can help identify locations that may require
-additional investigation into restaurant mix, pricing structure, or data
-quality.
+- The 4.0–4.5 rating bucket contains approximately 54K restaurants.
+- Pure Veg restaurants represent 41.99% of the dashboard total.
+- Around 99K restaurants are shown with offers.
+- North Indian, Indian and Chinese are among the prominent cuisine groups.
+- Average pricing varies considerably across locations.
 
-------------------------------------------------------------------------
+### Recommendations Shown on the Dashboard
 
-## 📊 Price vs Rating
+- Investigate high-performing/high-density locations such as Kanpur and Indore.
+- Use cuisine-level demand patterns when designing targeted offers.
+- Examine lower-rated restaurant segments for potential service-quality improvement.
+- Investigate pricing differences in high-price locations such as Lalitpur.
+- Analyse the Pure Veg segment separately for targeted visibility and promotions.
 
-The scatter plot places:
+---
 
--   **Average Price** on the X-axis
--   **Rating** on the Y-axis
--   Rating-count information into the bubble representation
+## 🍜 Page 2 — Cuisine, Ratings & Offers Analysis
 
-The purpose is not simply to find the most expensive restaurants, but to
-explore whether higher prices appear alongside stronger ratings and
-where unusual observations occur.
+![Cuisine, Ratings & Offers](Screenshots/Cuisine_Ratings_Offers.png)
 
-------------------------------------------------------------------------
+The second page moves from the overall market view into more detailed **cuisine, rating and promotional analysis**.
 
-## 🌿 Pure Veg Distribution
+### KPI Cards
 
-The dashboard uses a donut chart to compare Pure Veg and non-Pure-Veg
-restaurants.
+| KPI | Dashboard Value |
+|---|---:|
+| 🍜 Total Cuisines | **228** |
+| ⭐ Rated Restaurants | **76K** |
+| 🎁 Offer Availability % | **99.07%** |
+| 🏆 Top Rated Restaurant | **Dynamic / filter dependent** |
 
-### Dashboard result
+### Main Visuals
 
--   **Pure Veg: 41.99%**
--   **Non-Pure Veg: 58.01%**
+**Top Cuisines by Restaurant Listings**  
+Highlights cuisine categories with high restaurant presence. The dashboard shows categories such as North Indian, Chinese, Indian, Snacks, Biryani and Pizzas.
 
-The green treatment for Pure Veg makes this KPI visually distinct while
-maintaining the dashboard's orange Swiggy-inspired theme.
+**Average Price by Cuisine**  
+Compares average restaurant pricing across cuisine categories. Portuguese, Greek, Japanese, Singaporean, European and Steakhouse appear among the higher-priced categories shown.
 
-------------------------------------------------------------------------
+**Average Rating by Cuisine**  
+Compares average ratings across cuisine categories, with several displayed categories around the **4.4–4.6** range.
 
-# 💡 Key Findings
+**Rating vs Rating Count**  
+Examines how restaurant ratings relate to rating-count information. This is useful because a rating supported by more customer ratings provides different context from a similar rating with limited rating volume.
 
-### 1. Restaurant supply is geographically broad
+**Restaurants With vs Without Offers**  
+Shows:
 
-The dataset covers **581 locations**, giving the analysis substantial
-geographical breadth.
+- 🎁 With Offers — **98.74%**
+- ❌ Without Offers — **1.26%**
 
-### 2. Ratings are concentrated around 4.0--4.5
+**Number of Offers by Location**  
+Compares the number of promotional offers across locations.
 
-The **4.0--4.5** rating bucket is the largest group shown in the
-dashboard, at approximately **54K records**.
+**Top Rated Restaurants Table**  
+Provides restaurant-level detail including:
 
-### 3. North Indian and Indian cuisine groups have strong representation
+- Restaurant Name
+- Location
+- Cuisine
+- Rating
+- Rating Count Lower Bound
+- Average Price
+- Number of Offers
 
-The cuisine treemap shows North Indian/Chinese, Indian and
-Chinese-related categories among the most prominent groups.
+This allows the user to move from aggregated analysis into individual restaurant records.
 
-### 4. Pure Veg represents a substantial segment
+---
 
-Around **42%** of the dashboard's restaurant records are classified as
-Pure Veg.
+# 📂 Dataset
 
-### 5. Offers are widespread
+The uploaded source dataset is:
 
-The dashboard shows approximately **99K restaurants with offers**, while
-the raw dataset contains offers on roughly **98.7% of records** when
-`Number of Offers > 0` is used as the indicator.
+```text
+Swiggy_Dataset.csv
+```
 
-### 6. Pricing varies substantially by location
+### Dataset Profile
 
-Lalitpur stands out in the dashboard's average-price comparison and is
-therefore a useful location for further investigation.
+| Attribute | Value |
+|---|---:|
+| Records | **140,657** |
+| Columns | **10** |
+| Unique Restaurants | **100,665** |
+| Unique Locations | **581** |
+| Unique Cuisine Values | **2133** |
+| Pure Veg share in raw data | **42.06%** |
+| Records with Number of Offers > 0 | **98.71%** |
+| Raw average rating | **4.04** |
+| Raw average price | **₹270.08** |
 
-------------------------------------------------------------------------
+> Dashboard KPI values can differ from raw-data profiling because the Power BI model may use distinct counts, filters, transformations, rating eligibility rules, or other business definitions.
 
-# 🎯 Recommendations
+### Source Columns
 
-The dashboard can support several follow-up business actions:
+| Column | Description |
+|---|---|
+| `Restaurant Name` | Restaurant listing name |
+| `Cuisine` | Cuisine or cuisine combination |
+| `Rating` | Restaurant rating |
+| `Number of Ratings` | Rating/review-count information |
+| `Average Price` | Approximate average price |
+| `Number of Offers` | Number of offers |
+| `Offer Name` | Promotional offer information |
+| `Area` | Restaurant operating area |
+| `Pure Veg` | Pure vegetarian indicator |
+| `Location` | Restaurant city/location |
 
--   Investigate high-price locations to understand whether pricing is
-    driven by cuisine mix, restaurant positioning, or data anomalies.
--   Segment restaurant promotions by location and cuisine instead of
-    treating all offers uniformly.
--   Examine lower-rated restaurants separately to identify opportunities
-    for service-quality improvement.
--   Use cuisine-level analysis to understand where restaurant supply is
-    concentrated and where potential gaps may exist.
--   Track Pure Veg restaurants as a distinct segment for targeted
-    discovery and promotional analysis.
--   Combine rating with rating-count information before interpreting a
-    restaurant as a strong performer.
+---
 
-------------------------------------------------------------------------
+# 🧹 Data Cleaning & Transformation
 
-# 🎛️ Interactive Experience
+The raw CSV was prepared for analysis before building the dashboard.
 
-The dashboard includes slicers for:
+### Key preparation steps
 
--   📍 **Location**
--   🍜 **Cuisine**
--   🌿 **Pure Veg**
--   🏪 **Restaurant**
+- Reviewed missing and inconsistent values.
+- Converted fields to appropriate data types.
+- Cleaned the `Average Price` field for numerical analysis.
+- Prepared `Rating` for numerical calculations.
+- Prepared `Number of Ratings` for rating-count analysis.
+- Standardised categorical fields such as `Pure Veg` and `Location`.
+- Created rating buckets used in the dashboard.
+- Prepared cuisine information for aggregation.
+- Created measures and calculated fields required for the visuals.
 
-It also includes navigation controls such as:
+### Missing Values in the Source File
 
--   **Reset** --- clears selected filters.
--   **Forward** --- moves to the next analysis view when available.
+The uploaded CSV contains:
 
-The visuals respond to the selected filters, allowing the user to move
-from an overall market view to a specific location, cuisine or
-restaurant.
+| Field | Missing Records |
+|---|---:|
+| `Number of Ratings` | **14,542** |
+| `Offer Name` | **1,808** |
+| `Cuisine` | **27** |
+| `Area` | **2** |
 
-------------------------------------------------------------------------
+The remaining listed source fields contain no missing values.
+
+---
 
 # 🧮 Power BI & DAX
 
-The project uses DAX measures for KPI and analytical calculations.
+The project uses DAX for KPI calculations, aggregation and interactive analysis.
 
-Examples include:
+Examples:
 
-``` dax
+```DAX
 Total Restaurants =
 DISTINCTCOUNT('Swiggy'[Restaurant Name])
 ```
 
-``` dax
+```DAX
 Total Locations =
 DISTINCTCOUNT('Swiggy'[Location])
 ```
 
-``` dax
+```DAX
 Average Rating =
 AVERAGE('Swiggy'[Rating])
 ```
 
-``` dax
+```DAX
 Average Price =
 AVERAGE('Swiggy'[Average Price])
 ```
 
-Additional calculations were used for:
+Additional calculations support:
 
--   Pure Veg percentage
--   Restaurant offer availability
--   Rating buckets
--   Cuisine counts
--   Rating-count analysis
--   Location-level comparisons
--   Restaurant-level analysis
+- Pure Veg %
+- Offer Availability %
+- Rated Restaurants
+- Total Cuisines
+- Rating Buckets
+- Rating Count Lower Bound
+- Restaurant-level metrics
+- Dynamic Top Rated Restaurant logic
 
-> Measure names may vary slightly depending on the final Power BI model.
+> Exact measure names can vary depending on the final Power BI model.
 
-------------------------------------------------------------------------
+---
+
+# 🎛️ Interactive Features
+
+The dashboard provides slicers for:
+
+- 📍 **Location**
+- 🍜 **Cuisine**
+- 🌿 **Pure Veg**
+- 🏪 **Restaurant**
+
+Navigation controls include:
+
+- **Reset** — clears selected filters.
+- **Forward** — moves from the overview page to the detailed page.
+- **Back** — returns to the previous page.
+
+The visuals update according to the selected filters, enabling both high-level and restaurant-level exploration.
+
+---
+
+# 💡 Business Insights
+
+The dashboard supports several analytical observations:
+
+### Restaurant Coverage
+The source dataset contains **140,657 restaurant records across 581 locations**, providing broad geographical coverage.
+
+### Rating Distribution
+The **4.0–4.5** rating bucket is the largest category shown on the overview page, at approximately **54K records**.
+
+### Cuisine Presence
+North Indian, Chinese and Indian-related cuisine categories have substantial representation in the dashboard.
+
+### Pricing Variation
+Restaurant pricing varies noticeably across locations and cuisines. Lalitpur is a visible high-price outlier in the location-level chart.
+
+### Pure Veg Segment
+Pure Veg restaurants account for **41.99%** in the dashboard, creating a sizeable segment for separate analysis.
+
+### Offers
+The detailed dashboard shows **98.74% of restaurants with offers** and **1.26% without offers** in its offer-availability visual.
+
+### Rating Context
+The rating-vs-rating-count analysis highlights why rating should be interpreted together with the volume of customer ratings rather than in isolation.
+
+---
+
+# 🎯 Business Recommendations
+
+Based on the dashboard analysis, the project can be extended into the following business questions:
+
+1. **Location strategy**  
+   Investigate locations with high restaurant concentration and compare supply, pricing, cuisine mix and rating quality.
+
+2. **Cuisine strategy**  
+   Segment promotions and restaurant discovery by cuisine instead of applying a single strategy across all categories.
+
+3. **Rating improvement**  
+   Drill into lower-rating segments to identify restaurant-level patterns and potential service-quality opportunities.
+
+4. **Pricing analysis**  
+   Investigate unusually high or low average prices by location and cuisine before making commercial decisions.
+
+5. **Offer effectiveness**  
+   Move beyond offer availability and analyse whether offers are associated with higher ratings, restaurant visibility or other measurable outcomes.
+
+6. **Pure Veg segmentation**  
+   Treat Pure Veg restaurants as a distinct segment and compare their pricing, ratings, locations and cuisine combinations.
+
+---
 
 # 🛠️ Technology Stack
 
-### Power BI
-
--   Dashboard development
--   Data modelling
--   Interactive visuals
--   KPI cards
--   Slicers and navigation
--   Business storytelling
+### Microsoft Power BI
+- Dashboard development
+- Data modelling
+- KPI cards
+- Interactive visualisations
+- Slicers
+- Page navigation
+- Business storytelling
 
 ### Power Query
-
--   Data cleaning
--   Data type conversion
--   Text transformation
--   Missing-value handling
--   Feature preparation
+- Data cleaning
+- Data transformation
+- Data type conversion
+- Text preparation
+- Missing-value review
 
 ### DAX
-
--   Measures
--   Aggregations
--   Percentages
--   Distinct counts
--   Conditional business metrics
+- KPI measures
+- Distinct counts
+- Averages
+- Percentages
+- Conditional calculations
+- Dynamic metrics
 
 ### CSV
+Primary source data format.
 
-Used as the primary source data format.
-
-------------------------------------------------------------------------
+---
 
 # 📁 Suggested Repository Structure
 
-``` text
+```text
 swiggy-restaurant-analysis/
 │
 ├── Dashboard/
@@ -373,71 +394,88 @@ swiggy-restaurant-analysis/
 │   └── Swiggy_Dataset.csv
 │
 ├── Screenshots/
-│   └── Restaurant_Overview.png
+│   ├── Restaurant_Overview.png
+│   └── Cuisine_Ratings_Offers.png
 │
 └── README.md
 ```
 
-------------------------------------------------------------------------
-
-# 🚀 How to Explore the Project
-
-1.  Download or clone the repository.
-2.  Open `Dashboard/Swiggy_Dashboard.pbix` in **Power BI Desktop**.
-3.  Refresh the dataset if required.
-4.  Use the slicers to filter by location, cuisine, Pure Veg status or
-    restaurant.
-5.  Hover over charts to inspect detailed values.
-6.  Use the navigation controls to move between available dashboard
-    views.
-
-------------------------------------------------------------------------
+---
 
 # 💼 Skills Demonstrated
 
-This project demonstrates practical skills in:
+`Power BI` · `Power Query` · `DAX` · `Data Cleaning` · `Data Transformation` · `Data Analysis` · `Data Visualization` · `KPI Design` · `Interactive Dashboard Development` · `Business Intelligence` · `Data Storytelling`
 
-`Power BI` · `Power Query` · `DAX` · `Data Cleaning` ·
-`Data Transformation` · `Data Analysis` · `Data Visualization` ·
-`KPI Design` · `Interactive Dashboarding` · `Business Intelligence` ·
-`Data Storytelling`
+---
 
-------------------------------------------------------------------------
+# 🚀 How to Use
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+```
+
+### 2. Open the project
+
+Open:
+
+```text
+Dashboard/Swiggy_Dashboard.pbix
+```
+
+using **Microsoft Power BI Desktop**.
+
+### 3. Explore the dashboard
+
+Use the slicers and navigation buttons to analyse:
+
+- Locations
+- Cuisines
+- Pure Veg status
+- Restaurants
+- Ratings
+- Pricing
+- Offers
+
+---
 
 # 👩‍💻 Author
 
 ## Sheena Charaya
 
-**Data Analytics \| Power BI \| SQL \| Excel \| Python**
+**Data Analytics | Power BI | SQL | Excel | Python**
 
-📧 **Email:** <sheena.charaya@gmail.com>
+📧 **Email:** [sheena.charaya@gmail.com](mailto:sheena.charaya@gmail.com)
 
 🔗 **[LinkedIn](https://www.linkedin.com/in/sheena-charaya/)**
 
-------------------------------------------------------------------------
+---
 
-## ⭐ Project Note
+## ⭐ Project Summary
 
-This project was created as a practical data analytics portfolio project
-to demonstrate an end-to-end workflow:
+This project demonstrates how a large restaurant dataset can be transformed into an interactive business intelligence solution.
 
-``` text
-Raw Restaurant Data
+The final dashboard combines:
+
+```text
+140K+ Source Records
         ↓
-Data Understanding
-        ↓
-Data Cleaning & Transformation
+Data Preparation
         ↓
 Power Query
         ↓
-DAX & KPI Development
+DAX Measures
         ↓
-Interactive Visualizations
+KPI Analysis
         ↓
-Dashboard Design
+Location & Cuisine Analysis
         ↓
-Business Insights & Recommendations
+Rating & Pricing Analysis
+        ↓
+Offer Analysis
+        ↓
+Business Insights
 ```
 
-The objective is to transform a large restaurant dataset into a clear,
-interactive and business-oriented analytical view.
+The result is a **two-page Power BI dashboard** that moves from an overall restaurant landscape to detailed cuisine, rating, pricing, offer and restaurant-level analysis.
